@@ -1,16 +1,26 @@
 name: 'Array API tests reporting'
 description: 'Run the array API testsuite and report the results'
 inputs:
-  array-api-namespace:
+  array-api-tests-module:
     description: 'Name of the namespace to run the array API testsuite against'
     required: true
     type: string
-
+  array-library-install:
+    description: "Command to install the array library"
+    required: true
+    type: string
 env:
   ARRAY_API_TESTS_VERSION: "master"
 
 runs:
   using: "composite"
   steps:
-    - run: install.sh
+    - name: "Install the array API tests test suite"
+      run: install.sh
+      shell: bash
+    - name: "Install the array library"
+      run: ${{ inputs.array-library-install }}
+      shell: bash
+    - name: "Run the array API test suite"
+      run: test.sh ${{ inputs.array-api-tests-module }}
       shell: bash

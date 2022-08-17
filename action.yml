@@ -9,12 +9,16 @@ inputs:
     description: "Command to install the array library"
     required: true
     type: string
-env:
-  ARRAY_API_TESTS_VERSION: "master"
 
 runs:
   using: "composite"
   steps:
+    - name: Checkout array-api-tests
+      uses: actions/checkout@v1
+      with:
+        repository: data-apis/array-api-tests
+        ref: "master"
+        submodules: 'true'
     - name: "Install the array API tests test suite"
       run: install.sh
       shell: bash

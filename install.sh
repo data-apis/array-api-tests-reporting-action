@@ -1,5 +1,10 @@
 #!/bin/bash
+set -x
+set -e
 
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
-python -m pip install "git+https://github.com/data-apis/array-api-tests@$ARRAY_API_TESTS_VERSION"
+
+git clone https://github.com/data-apis/array-api-tests
+cd array-api-tests
+git checkout "$ARRAY_API_TESTS_VERSION"

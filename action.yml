@@ -6,6 +6,9 @@ inputs:
     required: true
     type: string
 
+env:
+  ARRAY_API_TESTS_VERSION: "master"
+
 runs:
   using: "composite"
   steps:

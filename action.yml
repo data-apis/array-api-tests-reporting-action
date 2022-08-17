@@ -1,0 +1,13 @@
+name: 'Array API tests reporting'
+description: 'Run the array API testsuite and report the results'
+inputs:
+  array-api-namespace:
+    description: 'Name of the namespace to run the array API testsuite against'
+    required: true
+    type: string
+
+runs:
+  using: "composite"
+  steps:
+    - run: install.sh
+      shell: bash

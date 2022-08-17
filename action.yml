@@ -25,6 +25,11 @@ runs:
         ref: "master"
         submodules: 'true'
         path: array-api-tests
+    - name: Test
+      run: |
+        echo $GITHUB_WORKSPACE
+        ls $GITHUB_WORKSPACE
+      shell: bash
     - name: Set up Python
       uses: actions/setup-python@v4
       with:

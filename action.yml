@@ -18,12 +18,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ inputs.python-version }}
-    - name: "Install the array API tests test suite"
-      run: install.sh
+    - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
       shell: bash
     - name: Checkout array-api-tests
       uses: actions/checkout@v3
@@ -32,6 +27,13 @@ runs:
         ref: "master"
         submodules: 'true'
         path: array-api-tests
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ inputs.python-version }}
+    - name: "Install the array API tests test suite"
+      run: install.sh
+      shell: bash
     - name: "Install the array library"
       run: ${{ inputs.array-library-install }}
       shell: bash

@@ -40,3 +40,6 @@ runs:
     - name: "Run the array API test suite"
       run: test.sh ${{ inputs.array-api-tests-module }}
       shell: bash
+      with:
+        name: json-report
+        path: .report.json

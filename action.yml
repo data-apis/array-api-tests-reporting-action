@@ -41,8 +41,8 @@ runs:
       run: test.sh ${{ inputs.array-api-tests-module }}
       shell: bash
     - name: "Upload JSON report artifact"
+      uses: actions/upload-artifact@main
       with:
-        uses: actions/upload-artifact@main
         name: json-report
         path: .report.json
 

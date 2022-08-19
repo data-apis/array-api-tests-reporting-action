@@ -43,3 +43,7 @@ runs:
       with:
         name: json-report
         path: .report.json
+
+branding:
+  icon: 'grid'
+  color: 'blue'

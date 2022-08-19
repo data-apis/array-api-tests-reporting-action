@@ -40,6 +40,11 @@ runs:
     - name: "Run the array API test suite"
       run: test.sh ${{ inputs.array-api-tests-module }}
       shell: bash
+    - name: "Upload JSON report artifact"
+      with:
+        uses: actions/upload-artifact@main
+        name: json-report
+        path: .report.json
 
 branding:
   icon: 'grid'

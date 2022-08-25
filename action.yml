@@ -44,7 +44,7 @@ runs:
       uses: actions/upload-artifact@main
       with:
         name: json-report
-        path: $GITHUB_WORKSPACE/array-api-tests/.report.json
+        path: ${{ env.GITHUB_WORKSPACE }}/array-api-tests/.report.json
 
 branding:
   icon: 'grid'

@@ -5,6 +5,15 @@ inputs:
     description: 'Name of the namespace to run the array API testsuite against'
     required: true
     type: string
+  array-library-name:
+    description: "Name of the array library being tested. Defaults to inputs.array-api-tests-module"
+    required: false
+    type: string
+    default: ${{ inputs.array-api-tests-module }}
+  array-library-version:
+    description: "Version of the array library being tested"
+    required: true
+    type: string
   array-library-install:
     description: "Command to install the array library"
     required: true
@@ -45,6 +54,24 @@ runs:
       with:
         name: json-report
         path: "${{ format('{0}/array-api-tests/.report.json', env.GITHUB_WORKSPACE) }}"
+    - name: 'Load results'
+      id: load-results
+      run: |
+        cd $GITHUB_WORKSPACE/array-api-tests
+        results=`cat ./.report.json`
+        echo "::set-output name=results::$results"
+        platform=`jq .environment.Platform $results`
+        echo "::set-output name=platform::$platform"
+        python_version=`jq .environment.Python $results`
+        echo "::set-output name=python_version::$python_version"
+    - name: 'Post data'
+      uses: distributhor/workflow-webhook@v2
+      env:
+        webhook_url: ${{ secrets.DATA_APIS_WEBHOOK_URL }}
+        webhook_secret: ${{ secrets.DATA_APIS_WEBHOOK_SECRET }}
+        data: '{ "schema": "v1", "name": "${{ inputs.array-api-tests-module
+  }}", "version": ${{ inputs.array-library-version }}, "timestamp": ${{
+  github.event.release.created_at }}, "platform": "${{ steps.load-results.outputs.platform", "python": ${{ steps.load-results.outputs.python_version }}, "data": ${{ steps.load-results.outputs.results }}, "test_suite": "..." }'
 
 branding:
   icon: 'grid'

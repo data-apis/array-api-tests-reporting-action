@@ -9,7 +9,6 @@ inputs:
     description: "Name of the array library being tested. Defaults to inputs.array-api-tests-module"
     required: false
     type: string
-    default: ${{ inputs.array-api-tests-module }}
   array-library-version:
     description: "Version of the array library being tested"
     required: true

@@ -69,9 +69,7 @@ runs:
       env:
         webhook_url: ${{ secrets.DATA_APIS_WEBHOOK_URL }}
         webhook_secret: ${{ secrets.DATA_APIS_WEBHOOK_SECRET }}
-        data: '{ "schema": "v1", "name": "${{ inputs.array-api-tests-module
-  }}", "version": ${{ inputs.array-library-version }}, "timestamp": ${{
-  github.event.release.created_at }}, "platform": "${{ steps.load-results.outputs.platform", "python": ${{ steps.load-results.outputs.python_version }}, "data": ${{ steps.load-results.outputs.results }}, "test_suite": "..." }'
+        data: '{ "schema": "v1", "name": "${{ inputs.array-api-tests-module }}", "version": ${{ inputs.array-library-version }}, "timestamp": ${{ github.event.release.created_at }}, "platform": "${{ steps.load-results.outputs.platform", "python": ${{ steps.load-results.outputs.python_version }}, "data": ${{ steps.load-results.outputs.results }}, "test_suite": "..." }'
 
 branding:
   icon: 'grid'

@@ -27,12 +27,9 @@ outputs:
   results:
     description: "The results JSON"
     value: ${{ steps.load-results.outputs.results }}
-  platform:
-    description: "The platform the tests are run on"
-    value: ${{ steps.load-results.outputs.platform }}
-  python_version:
-    description: "The Python version the tests are run on"
-    value: ${{ steps.load-results.outputs.python_version }}
+  post_data=:
+    description: "The data to be posted to the webhook"
+    value: ${{ steps.load-results.outputs.post_data }}
 
 runs:
   using: "composite"

@@ -54,7 +54,8 @@ runs:
         name: json-report
         path: "${{ format('{0}/array-api-tests/.report.json', env.GITHUB_WORKSPACE) }}"
     - name: 'Load results'
-      id: load-results
+      id: load_results
+
       run: |
         cd $GITHUB_WORKSPACE/array-api-tests
         results=`cat ./.report.json`
@@ -69,9 +70,7 @@ runs:
       env:
         webhook_url: ${{ secrets.DATA_APIS_WEBHOOK_URL }}
         webhook_secret: ${{ secrets.DATA_APIS_WEBHOOK_SECRET }}
-        data: '{ "schema": "v1", "name": "${{ inputs.array-api-tests-module
-  }}", "version": ${{ inputs.array-library-version }}, "timestamp": ${{
-  github.event.release.created_at }}, "platform": "${{ steps.load-results.outputs.platform", "python": ${{ steps.load-results.outputs.python_version }}, "data": ${{ steps.load-results.outputs.results }}, "test_suite": "..." }'
+        data: '{ "schema": "v1", "name": "${{ inputs.array-api-tests-module }}", "version": ${{ inputs.array-library-version }}, "timestamp": ${{ github.event.release.created_at }}, "platform": "${{ steps.load_results .outputs.platform", "python": ${{ steps.load_results .outputs.python_version }}, "data": ${{ steps.load_results .outputs.results }}, "test_suite": "..." }'
 
 branding:
   icon: 'grid'

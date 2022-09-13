@@ -68,16 +68,10 @@ runs:
         results=`cat ./.report.json`
         echo "::set-output name=results::$results"
         platform=`jq .environment.Platform $results`
-        echo "::set-output name=platform::$platform"
         python_version=`jq .environment.Python $results`
-        echo "::set-output name=python_version::$python_version"
+        post_data='{ "schema": "v1", "name": "${{ inputs.array-api-tests-module }}", "version": ${{ inputs.array-library-version }}, "timestamp": ${{ github.event.release.created_at }}, "platform": "$platform", "python": $python_version, "data": ${{ steps.load-results.outputs.results }}, "test_suite": "..." }'
+        echo "::set-output name=post_data::$post_data"
       shell: bash
-    - name: 'Post data'
-      uses: distributhor/workflow-webhook@v2
-      env:
-        webhook_url: ${{ secrets.DATA_APIS_WEBHOOK_URL }}
-        webhook_secret: ${{ secrets.DATA_APIS_WEBHOOK_SECRET }}
-        data: '{ "schema": "v1", "name": "${{ inputs.array-api-tests-module }}", "version": ${{ inputs.array-library-version }}, "timestamp": ${{ github.event.release.created_at }}, "platform": "${{ steps.load-results.outputs.platform }}", "python": ${{ steps.load-results.outputs.python_version }}, "data": ${{ steps.load-results.outputs.results }}, "test_suite": "..." }'
 
 branding:
   icon: 'grid'
